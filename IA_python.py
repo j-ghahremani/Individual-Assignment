@@ -1,4 +1,5 @@
 import json
+import csv
 
 #Change the Pakistan.json file to exclude lines where high and low casualty estimates are equal to each other
 pakistan_fix = []
@@ -19,3 +20,11 @@ for line in pakistan_fix:
     y.append(x)
     final_list.append(y)
 
+#Save the final_list to a CSV file for use in R
+with open('pakistan.csv', 'w') as file:
+    writer = csv.writer(file, lineterminator='\n')
+    
+    writer.writerow(['End_date', 'Casualty_ratio'])
+
+    for incident in final_list:
+        writer.writerow(incident)
